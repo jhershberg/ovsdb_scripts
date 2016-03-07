@@ -15,13 +15,13 @@ This script pretty prints ovs flows created by ovsdb. Features include:
 4) Table numbers are given together with descriptive names
 5) Flows are grouped together by priority in decending order
 
-Usage:
+### Usage:
 This script must be run on the OpenStack controller since it uses the 
 neutron command to map MACs and IPs.
 > sudo ovs-ofctl -OOpenFlow13 dump-flows br-int | python readable_flows.py
 
-Sample Output:
-'''
+### Sample Output:
+```
 TABLE=60 (ROUTING)
     priority=2048 
             ip,reg3=0x44c,nw_dst=192.168.0.0/24 ACTIONS=set_field:fa:16:3e:16:eb:ee(192.168.0.1)->eth_src,dec_ttl,set_field:0x44c(1100)->tun_id,goto_table:70
@@ -30,13 +30,13 @@ TABLE=60 (ROUTING)
             ip,tun_id=0x445(1093),nw_dst=192.168.0.0/24 ACTIONS=move:NXM_OF_ETH_SRC[0..31]->NXM_NX_REG4[],move:NXM_OF_ETH_SRC[32..47]->NXM_NX_REG5[0..15],set_field:fa:16:3e:16:eb:ee(192.168.0.1)->eth_src,dec_ttl,set_field:0x44c(1100)->tun_id,goto_table:70
     priority=0 
             ACTIONS=goto_table:70
-'''
+```
 
 ##pplogs.py
 
 This script translates those huge karaf.log lines into something like this:
 
-'''
+```
 processEvent exit (SouthboundEvent [
   type=BRIDGE,
   action=ADD,
@@ -67,7 +67,7 @@ processEvent exit (SouthboundEvent [
       _value=6676d801-274c-4997-b2e8-c3ace9736bda
     ],
     etc....
-'''
+```
 
-Usage:
+### Usage:
 > cat interesting_log_lines | python pplogs.py
