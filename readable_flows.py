@@ -5,6 +5,26 @@ import sys
 import re
 from collections import defaultdict
 
+help ='''## readable_flows.py:
+
+This script pretty prints ovs flows created by ovsdb. Features include:
+
+1. Where possible, MACs are followed by their corresponding IP (in parenthases) and vice-versa
+2. Tunnel ids are followed by the decimal representation used by Open Daylight
+3. Counters and stats are removed so that meaningful diffs may be generated
+4. Table numbers are given together with descriptive names
+5. Flows are grouped together by priority in decending order
+
+### Usage:
+This script must be run on the OpenStack controller since it uses the
+neutron command to map MACs and IPs.
+> sudo ovs-ofctl -OOpenFlow13 dump-flows br-int | python readable_flows.py
+'''
+
+if len(sys.argv) > 1 and sys.argv[1] in ['-h', '-?', '--h', '--help']:
+    print help
+    sys.exit(0)
+
 DEFAULT_PRIO=32768
 
 TABLE_NAME = { \

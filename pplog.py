@@ -1,5 +1,12 @@
+#!/usr/bin/python
+
 import string
-from sys import stdout,stdin
+from sys import stdout,stdin,argv,exit
+
+if len(argv) > 1 and argv[1] in ['-h', '-?', '--h', '--help']:
+    print 'pplog.py pretty prints Open Daylight log lines, useful for lines containing large nested objects'
+    print 'Usage: Simply pipe the lines you are interested through this script'
+    exit(0)
 
 line_num = 0
 def nl():
